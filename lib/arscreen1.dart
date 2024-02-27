@@ -8,7 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
-import 'package:ar_flutter_plugin/datatypes/node_types.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:vector_math/vector_math_64.dart';
 import 'dart:math';
@@ -16,21 +15,21 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 
 class LocalAndWebObjectsWidget extends StatefulWidget {
-  LocalAndWebObjectsWidget({Key key}) : super(key: key);
+  LocalAndWebObjectsWidget({Key? key}) : super(key: key);
   @override
   _LocalAndWebObjectsWidgetState createState() =>
       _LocalAndWebObjectsWidgetState();
 }
 
 class _LocalAndWebObjectsWidgetState extends State<LocalAndWebObjectsWidget> {
-  ARSessionManager arSessionManager;
-  ARObjectManager arObjectManager;
+  late ARSessionManager arSessionManager;
+  late ARObjectManager arObjectManager;
   //String localObjectReference;
-  ARNode localObjectNode;
+  late ARNode localObjectNode;
   //String webObjectReference;
-  ARNode webObjectNode;
-  ARNode fileSystemNode;
-  HttpClient httpClient;
+  late ARNode webObjectNode;
+  late ARNode fileSystemNode;
+  late HttpClient httpClient;
 
   @override
   void dispose() {
@@ -143,101 +142,62 @@ class _LocalAndWebObjectsWidgetState extends State<LocalAndWebObjectsWidget> {
           zipFile: File('$dir/$filename'), destinationDir: Directory(dir));
       print("Unzipping successful");
     } catch (e) {
-      print("Unzipping failed: " + e);
+      print("Unzipping failed: ");
     }
   }
 
   Future<void> onLocalObjectAtOriginButtonPressed() async {
-    if (this.localObjectNode != null) {
-      this.arObjectManager.removeNode(this.localObjectNode);
-      this.localObjectNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.localGLTF2,
-          uri: "Models/Chicken_01.gltf",
-          scale: Vector3(0.2, 0.2, 0.2),
-          position: Vector3(0.0, 0.0, 0.0),
-          rotation: Vector4(1.0, 0.0, 0.0, 0.0));
-      bool didAddLocalNode = await this.arObjectManager.addNode(newNode);
-      this.localObjectNode = (didAddLocalNode) ? newNode : null;
+    this.arObjectManager.removeNode(this.localObjectNode);
+    //this.localObjectNode = null;
     }
-  }
 
   Future<void> onWebObjectAtOriginButtonPressed() async {
-    if (this.webObjectNode != null) {
-      this.arObjectManager.removeNode(this.webObjectNode);
-      this.webObjectNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.webGLB,
-          uri:
-          "https://firebasestorage.googleapis.com/v0/b/stridenseek.appspot.com/o/files%2FAR_Models%2FAlien.glb?alt=media&token=fffd9db1-dcc5-4dae-bb1f-95d7ea867817",
-          scale: Vector3(0.2, 0.2, 0.2));
-      bool didAddWebNode = await this.arObjectManager.addNode(newNode);
-      this.webObjectNode = (didAddWebNode) ? newNode : null;
+    this.arObjectManager.removeNode(this.webObjectNode);
+    //this.webObjectNode = null;
     }
-  }
 
   Future<void> onFileSystemObjectAtOriginButtonPressed() async {
-    if (this.fileSystemNode != null) {
-      this.arObjectManager.removeNode(this.fileSystemNode);
-      this.fileSystemNode = null;
-    } else {
-      var newNode = ARNode(
-          type: NodeType.fileSystemAppFolderGLB,
-          uri: "Alien.glb",
-          scale: Vector3(0.2, 0.2, 0.2));
-      //Alternative to use type fileSystemAppFolderGLTF2:
-      //var newNode = ARNode(
-      //    type: NodeType.fileSystemAppFolderGLTF2,
-      //    uri: "Chicken_01.gltf",
-      //    scale: Vector3(0.2, 0.2, 0.2));
-      bool didAddFileSystemNode = await this.arObjectManager.addNode(newNode);
-      this.fileSystemNode = (didAddFileSystemNode) ? newNode : null;
+    this.arObjectManager.removeNode(this.fileSystemNode);
+    //this.fileSystemNode = null;
     }
-  }
 
   Future<void> onLocalObjectShuffleButtonPressed() async {
-    if (this.localObjectNode != null) {
-      var newScale = Random().nextDouble() / 3;
-      var newTranslationAxis = Random().nextInt(3);
-      var newTranslationAmount = Random().nextDouble() / 3;
-      var newTranslation = Vector3(0, 0, 0);
-      newTranslation[newTranslationAxis] = newTranslationAmount;
-      var newRotationAxisIndex = Random().nextInt(3);
-      var newRotationAmount = Random().nextDouble();
-      var newRotationAxis = Vector3(0, 0, 0);
-      newRotationAxis[newRotationAxisIndex] = 1.0;
+    var newScale = Random().nextDouble() / 3;
+    var newTranslationAxis = Random().nextInt(3);
+    var newTranslationAmount = Random().nextDouble() / 3;
+    var newTranslation = Vector3(0, 0, 0);
+    newTranslation[newTranslationAxis] = newTranslationAmount;
+    var newRotationAxisIndex = Random().nextInt(3);
+    var newRotationAmount = Random().nextDouble();
+    var newRotationAxis = Vector3(0, 0, 0);
+    newRotationAxis[newRotationAxisIndex] = 1.0;
 
-      final newTransform = Matrix4.identity();
+    final newTransform = Matrix4.identity();
 
-      newTransform.setTranslation(newTranslation);
-      newTransform.rotate(newRotationAxis, newRotationAmount);
-      newTransform.scale(newScale);
+    newTransform.setTranslation(newTranslation);
+    newTransform.rotate(newRotationAxis, newRotationAmount);
+    newTransform.scale(newScale);
 
-      this.localObjectNode.transform = newTransform;
+    this.localObjectNode.transform = newTransform;
     }
-  }
 
   Future<void> onWebObjectShuffleButtonPressed() async {
-    if (this.webObjectNode != null) {
-      var newScale = Random().nextDouble() / 3;
-      var newTranslationAxis = Random().nextInt(3);
-      var newTranslationAmount = Random().nextDouble() / 3;
-      var newTranslation = Vector3(0, 0, 0);
-      newTranslation[newTranslationAxis] = newTranslationAmount;
-      var newRotationAxisIndex = Random().nextInt(3);
-      var newRotationAmount = Random().nextDouble();
-      var newRotationAxis = Vector3(0, 0, 0);
-      newRotationAxis[newRotationAxisIndex] = 1.0;
+    var newScale = Random().nextDouble() / 3;
+    var newTranslationAxis = Random().nextInt(3);
+    var newTranslationAmount = Random().nextDouble() / 3;
+    var newTranslation = Vector3(0, 0, 0);
+    newTranslation[newTranslationAxis] = newTranslationAmount;
+    var newRotationAxisIndex = Random().nextInt(3);
+    var newRotationAmount = Random().nextDouble();
+    var newRotationAxis = Vector3(0, 0, 0);
+    newRotationAxis[newRotationAxisIndex] = 1.0;
 
-      final newTransform = Matrix4.identity();
+    final newTransform = Matrix4.identity();
 
-      newTransform.setTranslation(newTranslation);
-      newTransform.rotate(newRotationAxis, newRotationAmount);
-      newTransform.scale(newScale);
+    newTransform.setTranslation(newTranslation);
+    newTransform.rotate(newRotationAxis, newRotationAmount);
+    newTransform.scale(newScale);
 
-      this.webObjectNode.transform = newTransform;
+    this.webObjectNode.transform = newTransform;
     }
-  }
 }

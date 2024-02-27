@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=3.2.4 <4.0.0"
 
 dependencies:
   flutter:
@@ -28,13 +28,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_cube: ^0.0.6
+  flutter_cube: 0.1.1
   ar_flutter_plugin: ^0.6.2
   path_provider: ^2.0.4
   flutter_archive: ^4.1.1
   url_launcher: ^6.0.10
-  arcore_flutter_plugin: ^0.0.11
-  model_viewer: ^0.8.1
+  arcore_flutter_plugin: ^0.1.0
+  model_viewer_plus: ^1.7.0
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +54,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - images/
-     - Models/
+     - model/
      - assets/
      - assets/jet/
   #   - images/a_dot_ham.jpeg

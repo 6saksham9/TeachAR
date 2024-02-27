@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 
 class AugmentedImages extends StatefulWidget {
-  const AugmentedImages({Key key}) : super(key: key);
+  const AugmentedImages({Key? key}) : super(key: key);
 
   @override
   _AugmentedImagesState createState() => _AugmentedImagesState();
@@ -11,7 +11,7 @@ class AugmentedImages extends StatefulWidget {
 
 class _AugmentedImagesState extends State<AugmentedImages> {
 
-  ArCoreController arCoreController;
+  late ArCoreController arCoreController;
   Map<int, ArCoreAugmentedImage> augmentedImagesMap = Map();
 
   whenArCoreViewCreated(ArCoreController coreController)

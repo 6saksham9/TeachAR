@@ -8,8 +8,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  Object jet;
-  Object shark;
+  late Object jet;
+  late Object shark;
   @override
   void initState() {
     jet = Object(fileName: "assets/jet/Jet.obj");

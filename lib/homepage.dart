@@ -7,7 +7,7 @@ import 'package:project/1stpage4th.dart';
 
 
 class Intro extends StatelessWidget {
-  const Intro({Key key}) : super(key: key);
+  const Intro({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class Intro extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey[300].withOpacity(1.0), //color of shadow
+                          color: Colors.grey[300]!.withOpacity(1.0), //color of shadow
                           spreadRadius: 1, //spread radius
                           blurRadius: 1, // blur radius
                           offset: Offset(0, 1), // changes position of shadow
@@ -118,7 +118,7 @@ class Intro extends StatelessWidget {
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             boxShadow:[
                               BoxShadow(
-                                color: Colors.grey[300].withOpacity(1.0), //color of shadow
+                                color: Colors.grey[300]!.withOpacity(1.0), //color of shadow
                                 spreadRadius: 1, //spread radius
                                 blurRadius: 1, // blur radius
                                 offset: Offset(0, 1), // changes position of shadow
@@ -159,7 +159,7 @@ class Intro extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       boxShadow:[
                         BoxShadow(
-                          color: Colors.grey[300].withOpacity(1.0), //color of shadow
+                          color: Colors.grey[300]!.withOpacity(1.0), //color of shadow
                           spreadRadius: 1, //spread radius
                           blurRadius: 1, // blur radius
                           offset: Offset(0, 1), // changes position of shadow
@@ -197,7 +197,7 @@ class Intro extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       boxShadow:[
                         BoxShadow(
-                          color: Colors.grey[300].withOpacity(1.0), //color of shadow
+                          color: Colors.grey[300]!.withOpacity(1.0), //color of shadow
                           spreadRadius: 1, //spread radius
                           blurRadius: 1, // blur radius
                           offset: Offset(0, 1), // changes position of shadow
@@ -236,7 +236,7 @@ class Intro extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       boxShadow:[
                         BoxShadow(
-                          color: Colors.grey[300].withOpacity(1.0), //color of shadow
+                          color: Colors.grey[300]!.withOpacity(1.0), //color of shadow
                           spreadRadius: 1, //spread radius
                           blurRadius: 1, // blur radius
                           offset: Offset(0, 1), // changes position of shadow
